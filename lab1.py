@@ -66,3 +66,18 @@ print("Lemmatization Complete.")
 #print(df)
 
 #Feature Representation
+
+#Import CountVectorizer for Bag of Words
+from sklearn.feature_extraction.text import CountVectorizer
+#import TfidfTransformer to implement Tf-idf
+from sklearn.feature_extraction.text import TfidfTransformer
+
+#vectorizer = CountVectorizer()
+bigram_vectorizer = CountVectorizer(ngram_range=(1,2),token_pattern=r'\b\w+\b', min_df=1)
+BOWText = bigram_vectorizer.fit_transform(df[textColName])
+transformer = TfidfTransformer(smooth_idf=True)
+tfidf = transformer.fit_transform(BOWText)
+
+#print(tfidf.toarray()[1])
+
+#Model Training
